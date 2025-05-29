@@ -45,6 +45,12 @@ func (d *Driver) GetCreateFlags() []mcnflag.Flag {
 			EnvVar: "HETZNER_LOCATION",
 			Value:  "nbg1",
 		},
+		mcnflag.StringFlag{
+			Name:   "hetzner-firewall",
+			Usage:  "Firewall (e.g. fsn1, nbg1)",
+			EnvVar: "HETZNER_Firewall",
+			Value:  "firewall",
+		},
 	}
 }
 
