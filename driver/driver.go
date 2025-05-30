@@ -51,12 +51,6 @@ func (d *Driver) GetCreateFlags() []mcnflag.Flag {
 			EnvVar: "HETZNER_Firewall",
 			Value:  "firewall",
 		},
-		mcnflag.StringFlag{
-			Name:   "hetzner-test",
-			Usage:  "test (e.g. fsn1, nbg1)",
-			EnvVar: "HETZNER_test",
-			Value:  "test",
-		},
 	}
 }
 
@@ -123,17 +117,17 @@ func (d *Driver) Create() error {
 }
 
 func (d *Driver) Remove() error {
-    ctx := context.Background()
-    client := hcloud.NewClient(hcloud.WithToken(d.APIToken))
+	ctx := context.Background()
+	client := hcloud.NewClient(hcloud.WithToken(d.APIToken))
 
-    if d.ServerID != 0 {
-        // Use DeleteWithResult instead of deprecated Delete
-        _, _, err := client.Server.DeleteWithResult(ctx, &hcloud.Server{ID: d.ServerID})
-        if err != nil {
-            return fmt.Errorf("deleting server %d: %w", d.ServerID, err)
-        }
-    }
-    return nil
+	if d.ServerID != 0 {
+		// Use DeleteWithResult instead of deprecated Delete
+		_, _, err := client.Server.DeleteWithResult(ctx, &hcloud.Server{ID: d.ServerID})
+		if err != nil {
+			return fmt.Errorf("deleting server %d: %w", d.ServerID, err)
+		}
+	}
+	return nil
 }
 
 func (d *Driver) GetIP() (string, error) {
