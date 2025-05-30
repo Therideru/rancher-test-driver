@@ -2,7 +2,7 @@ project_name: rancher-test-driver
 
 builds:
   - id: rancher-test-driver         # an internal name
-    main: ./cmd/rancher-test-driver # path to your package main
+    main: ./cmd/hetzner-driver # path to your package main
     binary: rancher-test-driver     # what the produced binary will be called
 
     env:
