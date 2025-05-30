@@ -1,0 +1,14 @@
+project_name: rancher-test-driver
+
+builds:
+  - id: rancher-test-driver         # an internal name
+    main: ./cmd/rancher-test-driver # path to your package main
+    binary: rancher-test-driver     # what the produced binary will be called
+    mode: default                   # omit or explicitly default to 'default';
+                                     # if you actually need a Go plugin set this to `plugin`
+    env:
+      - CGO_ENABLED=0
+
+archives:
+  - format: tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
