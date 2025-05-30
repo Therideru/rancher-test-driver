@@ -117,15 +117,17 @@ func (d *Driver) Create() error {
 }
 
 func (d *Driver) Remove() error {
-	ctx := context.Background()
-	client := hcloud.NewClient(hcloud.WithToken(d.APIToken))
-	if d.ServerID != 0 {
-		_, err := client.Server.Delete(ctx, &hcloud.Server{ID: d.ServerID})
-		if err != nil {
-			return err
-		}
-	}
-	return nil
+    ctx := context.Background()
+    client := hcloud.NewClient(hcloud.WithToken(d.APIToken))
+
+    if d.ServerID != 0 {
+        // Use DeleteWithResult instead of deprecated Delete
+        _, _, err := client.Server.DeleteWithResult(ctx, &hcloud.Server{ID: d.ServerID})
+        if err != nil {
+            return fmt.Errorf("deleting server %d: %w", d.ServerID, err)
+        }
+    }
+    return nil
 }
 
 func (d *Driver) GetIP() (string, error) {
