@@ -33,6 +33,8 @@ github.com/prometheus/common v0.42.0 h1:EKsfXEYo4JpWMHH5cg+KOUWeuJSov1Id8zGR8eeI
 github.com/prometheus/common v0.42.0/go.mod h1:xBwqVerjNdUDjgODMpudtOMwlOwf2SaTr1yjz4b7Zbc=
 github.com/prometheus/procfs v0.10.1 h1:kYK1Va/YMlutzCGazswoHKo//tZVlFpKYh+PymziUAg=
 github.com/prometheus/procfs v0.10.1/go.mod h1:nwNm2aOCAYw8uTR/9bWRREkZFxAUcWzPHWJq+XBB/FM=
+github.com/rancher/machine v0.15.0-rancher127 h1:6i+NZQOok6Q98l/E4FC64f29P1BmhGYK6KAY42FMVsA=
+github.com/rancher/machine v0.15.0-rancher127/go.mod h1:9D7LZbLqfNNbHsregTNpjC4oKi4zI6qA54KMzWPeVB4=
 github.com/rancher/machine v0.15.0-rancher128 h1:hM2o3b8BDH7JdORMg0gLCBIUTNWJ8K59TndQ5Vx9FCc=
 github.com/rancher/machine v0.15.0-rancher128/go.mod h1:kRTdtUr/tmLQltMgWRhBelX8JIPKvKHJRdtjL8Zy/ww=
 github.com/sirupsen/logrus v1.9.3 h1:dueUQJ1C2q9oE3F7wvmSGAaVtTmUizReu6fjN8uqzbQ=

@@ -4,7 +4,7 @@ go 1.23.6
 
 require (
 	github.com/hetznercloud/hcloud-go v1.59.2
-	github.com/rancher/machine v0.15.0-rancher128
+	github.com/rancher/machine v0.15.0-rancher127
 	golang.org/x/crypto v0.36.0
 )
 
