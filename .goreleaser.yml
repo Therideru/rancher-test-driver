@@ -1,9 +1,9 @@
-project_name: rancher-test-driver
+project_name: docker-machine-driver-hetzner
 
 builds:
-  - id: rancher-test-driver         # an internal name
+  - id: docker-machine-driver-hetzner        # an internal name
     main: ./cmd/hetzner-driver # path to your package main
-    binary: rancher-test-driver     # what the produced binary will be called
+    binary: docker-machine-driver-hetzner     # what the produced binary will be called
 
     env:
       - CGO_ENABLED=0
