@@ -15,7 +15,7 @@ import (
 type Driver struct {
 	*drivers.BaseDriver // Embeds MachineName, StorePath, SSHUser, SSHKeyPath, IPAddress, etc.
 
-	APIToken   string // Hetzner API token
+	ApiKey     string // Hetzner API token
 	ServerID   int64  // ID of the created server
 	SSHKeyID   int64  // ID of the uploaded SSH key
 	ServerType string // e.g. "cx11"
@@ -66,12 +66,12 @@ func (d *Driver) GetCreateFlags() []mcnflag.Flag {
 // SetConfigFromFlags reads the flag values into the Driver's fields.
 // Called automatically by Docker Machine / Rancher.
 func (d *Driver) SetConfigFromFlags(opts drivers.DriverOptions) error {
-	d.APIToken = opts.String("hetzner-api-token")
+	d.ApiKey = opts.String("hetzner-api-token")
 	d.ServerType = opts.String("hetzner-server-type")
 	d.Image = opts.String("hetzner-image")
 	d.Region = opts.String("hetzner-location")
 	d.SSHUser = "root" // default for Hetzner Cloud images
-	if d.APIToken == "" {
+	if d.ApiKey == "" {
 		return fmt.Errorf("hetzner-api-token is required")
 	}
 	return nil
@@ -79,7 +79,7 @@ func (d *Driver) SetConfigFromFlags(opts drivers.DriverOptions) error {
 
 // PreCreateCheck is run before Create() to validate the config.
 func (d *Driver) PreCreateCheck() error {
-	if d.APIToken == "" {
+	if d.ApiKey == "" {
 		return fmt.Errorf("hetzner-api-token is required")
 	}
 	return nil
@@ -93,7 +93,7 @@ func (d *Driver) Create() error {
 	}
 
 	ctx := context.Background()
-	client := hcloud.NewClient(hcloud.WithToken(d.APIToken))
+	client := hcloud.NewClient(hcloud.WithToken(d.ApiKey))
 
 	// 1) Generate SSH key + write private key locally:
 	publicKey, err := d.generateSSHKey()
@@ -160,7 +160,7 @@ func (d *Driver) Create() error {
 // Remove deletes the Hetzner server and the uploaded SSH key.
 func (d *Driver) Remove() error {
 	ctx := context.Background()
-	client := hcloud.NewClient(hcloud.WithToken(d.APIToken))
+	client := hcloud.NewClient(hcloud.WithToken(d.ApiKey))
 
 	// 1) Delete the server
 	if d.ServerID != 0 {
@@ -222,7 +222,7 @@ func (d *Driver) GetState() (state.State, error) {
 		return state.Error, fmt.Errorf("server ID not set")
 	}
 	ctx := context.Background()
-	client := hcloud.NewClient(hcloud.WithToken(d.APIToken))
+	client := hcloud.NewClient(hcloud.WithToken(d.ApiKey))
 	srv, _, err := client.Server.GetByID(ctx, d.ServerID)
 	if err != nil {
 		return state.Error, fmt.Errorf("fetching server %d: %w", d.ServerID, err)
@@ -251,7 +251,7 @@ func (d *Driver) Start() error {
 		return fmt.Errorf("server ID not set")
 	}
 	ctx := context.Background()
-	client := hcloud.NewClient(hcloud.WithToken(d.APIToken))
+	client := hcloud.NewClient(hcloud.WithToken(d.ApiKey))
 	srv, _, err := client.Server.GetByID(ctx, d.ServerID)
 	if err != nil {
 		return fmt.Errorf("cannot fetch server %d: %w", d.ServerID, err)
@@ -270,7 +270,7 @@ func (d *Driver) Stop() error {
 		return fmt.Errorf("server ID not set")
 	}
 	ctx := context.Background()
-	client := hcloud.NewClient(hcloud.WithToken(d.APIToken))
+	client := hcloud.NewClient(hcloud.WithToken(d.ApiKey))
 	srv, _, err := client.Server.GetByID(ctx, d.ServerID)
 	if err != nil {
 		return fmt.Errorf("cannot fetch server %d: %w", d.ServerID, err)
@@ -289,7 +289,7 @@ func (d *Driver) Restart() error {
 		return fmt.Errorf("server ID not set")
 	}
 	ctx := context.Background()
-	client := hcloud.NewClient(hcloud.WithToken(d.APIToken))
+	client := hcloud.NewClient(hcloud.WithToken(d.ApiKey))
 	srv, _, err := client.Server.GetByID(ctx, d.ServerID)
 	if err != nil {
 		return fmt.Errorf("cannot fetch server %d: %w", d.ServerID, err)
