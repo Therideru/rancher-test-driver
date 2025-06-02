@@ -38,9 +38,9 @@ func NewDriver(machineName, storePath string) *Driver {
 func (d *Driver) GetCreateFlags() []mcnflag.Flag {
 	return []mcnflag.Flag{
 		mcnflag.StringFlag{
-			Name:   "hetzner-api-token",
+			Name:   "hetzner-api-key",
 			Usage:  "Hetzner Cloud API Token",
-			EnvVar: "HETZNER_API_TOKEN",
+			EnvVar: "HETZNER_API_KEY",
 		},
 		mcnflag.StringFlag{
 			Name:   "hetzner-server-type",

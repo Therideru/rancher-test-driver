@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	plugin.RegisterDriver(hetzner.NewDriver("", ""))
+	plugin.RegisterDriver(new(hetzner.Driver))
 }
