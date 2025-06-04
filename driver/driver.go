@@ -66,13 +66,13 @@ func (d *Driver) GetCreateFlags() []mcnflag.Flag {
 // SetConfigFromFlags reads the flag values into the Driver's fields.
 // Called automatically by Docker Machine / Rancher.
 func (d *Driver) SetConfigFromFlags(opts drivers.DriverOptions) error {
-	d.ApiKey = opts.String("hetzner-api-token")
+	d.ApiKey = opts.String("hetzner-api-key")
 	d.ServerType = opts.String("hetzner-server-type")
 	d.Image = opts.String("hetzner-image")
 	d.Region = opts.String("hetzner-location")
 	d.SSHUser = "root" // default for Hetzner Cloud images
 	if d.ApiKey == "" {
-		return fmt.Errorf("hetzner-api-token is required")
+		return fmt.Errorf("hetzner-api-key is required")
 	}
 	return nil
 }
@@ -80,7 +80,7 @@ func (d *Driver) SetConfigFromFlags(opts drivers.DriverOptions) error {
 // PreCreateCheck is run before Create() to validate the config.
 func (d *Driver) PreCreateCheck() error {
 	if d.ApiKey == "" {
-		return fmt.Errorf("hetzner-api-token is required")
+		return fmt.Errorf("hetzner-api-key is required")
 	}
 	return nil
 }
